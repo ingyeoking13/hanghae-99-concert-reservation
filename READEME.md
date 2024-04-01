@@ -4,6 +4,10 @@
 
 https://chip-supernova-606.notion.site/df146619666d472a861b190529608ea6?pvs=4
 
+## API 명세
+
+https://chip-supernova-606.notion.site/API-bb97038b80ce4c989322e4fb0452e900?pvs=4
+
 ## 마일스톤
 
 1주차: 설계안 및 API 명세, FakeAPI 작성, ERD 작성, 서버 배포
