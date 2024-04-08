@@ -1,4 +1,4 @@
-package reservation.DTO;
+package reservation.Controller.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

@@ -2,9 +2,9 @@ package reservation.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reservation.DTO.Seat;
-import reservation.DTO.SeatInfo;
-import reservation.DTO.Show;
+import reservation.Controller.DTO.Seat;
+import reservation.Controller.DTO.SeatInfo;
+import reservation.Controller.DTO.Show;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

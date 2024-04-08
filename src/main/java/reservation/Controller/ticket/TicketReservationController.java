@@ -3,7 +3,7 @@ package reservation.Controller.ticket;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reservation.DTO.ticket.TicketId;
+import reservation.Controller.DTO.ticket.TicketId;
 
 @RestController
 @RequestMapping("/ticket")

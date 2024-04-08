@@ -1,4 +1,4 @@
-package reservation.DTO;
+package reservation.Controller.DTO;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
