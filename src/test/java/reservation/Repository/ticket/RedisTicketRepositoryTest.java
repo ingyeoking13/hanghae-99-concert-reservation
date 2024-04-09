@@ -12,7 +12,7 @@ class RedisTicketRepositoryTest {
     @Autowired private TicketWriterRepository ticketWriterRepository;
 
     @Test
-    void test_대기표읽기() {
+    void test_대기표_쓰기읽기() {
         // given
         ticketWriterRepository.writeNewTicket("test", 1);
         ticketWriterRepository.writeNewTicket("test", 2);

@@ -16,7 +16,8 @@ public class TicketService {
     @Autowired TicketWriterRepository ticketWriterRepository;
     private final int poolSize = 50;
 
-    public TicketService(TicketReaderRepository ticketReaderRepository, TicketWriterRepository ticketWriterRepository) {
+    public TicketService(TicketReaderRepository ticketReaderRepository,
+                         TicketWriterRepository ticketWriterRepository) {
         this.ticketReaderRepository = ticketReaderRepository;
         this.ticketWriterRepository = ticketWriterRepository;
     }
