@@ -17,8 +17,8 @@ public class RedisTicketWriterRepository implements TicketWriterRepository {
 
     public RedisTicketWriterRepository(RedisTemplate<String, String> redisTemplate) {
         this.ticketRedisTemplate = redisTemplate;
-        this.zSetOperations = redisTemplate.opsForZSet();
-        this.valueOperation = redisTemplate.opsForValue();
+        this.zSetOperations = this.ticketRedisTemplate.opsForZSet();
+        this.valueOperation = this.ticketRedisTemplate.opsForValue();
     }
 
     @Override
