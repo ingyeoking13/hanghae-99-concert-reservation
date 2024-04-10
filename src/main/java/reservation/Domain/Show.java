@@ -3,6 +3,7 @@ package reservation.Domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import reservation.Service.DTO.ConcertShow;
 
 import java.time.LocalDateTime;
 
@@ -27,4 +28,12 @@ public class Show {
     @ManyToOne
     @JoinColumn(name="concert_id")
     private Concert concert;
+
+    public ConcertShow toConcertShow(){
+        return ConcertShow.builder()
+                .name(this.name)
+                .price(this.price)
+                .datetime(this.dateTime)
+                .id(id).build();
+    }
 }

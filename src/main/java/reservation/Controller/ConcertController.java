@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import reservation.Controller.DTO.BaseResponse;
 import reservation.Controller.DTO.Show;
+import reservation.Service.ConcertShowService;
 import reservation.Service.Exception.TokenUnavailableException;
 import reservation.Service.Exception.WaitingException;
 import reservation.Service.TicketService;
@@ -15,7 +16,8 @@ import java.util.List;
 
 @RestController
 public class ConcertController {
-    TicketService ticketService;
+    private TicketService ticketService;
+    private ConcertShowService concertShowService;
     @GetMapping("/concerts")
     public BaseResponse<List<Show>> getConcerts(@RequestHeader("token_id") String tokenId) {
         List<Show> result = new ArrayList<>();
