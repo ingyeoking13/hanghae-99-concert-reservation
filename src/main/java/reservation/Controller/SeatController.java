@@ -18,7 +18,7 @@ public class SeatController {
         result.setConcertShow(
                 ConcertShow.builder()
                         .name("test")
-                        .point(1000)
+                        .price(1000)
                         .dateTime(LocalDateTime.MAX).build()
         );
         List<Seat> seats = new ArrayList<>();

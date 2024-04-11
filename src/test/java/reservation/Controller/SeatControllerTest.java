@@ -30,7 +30,7 @@ class SeatControllerTest {
         SeatInfo seatInfo = new SeatInfo();
 
         ConcertShow concertShow = ConcertShow.builder()
-                .point(1000)
+                .price(1000)
                 .dateTime(LocalDateTime.MAX)
                 .name("test")
                 .build();

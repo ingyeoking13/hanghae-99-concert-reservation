@@ -1,5 +1,6 @@
 spring.redis.host: localhost
 spring.redis.port: 6379
+spring.redis.maxmemory: 128M
 spring.datasource.driver-class-name: com.mysql.cj.jdbc.Driver
 spring.datasource.url: jdbc:mysql://localhost:3306/concert?serverTimezone=Asia/Seoul
 spring.datasource.username: root

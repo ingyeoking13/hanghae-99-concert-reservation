@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import reservation.Repository.ticket.TicketReaderRepository;
 import reservation.Repository.ticket.TicketWriterRepository;
 import reservation.DTO.Ticket;
-import reservation.Service.Exception.TokenUnavailableException;
-import reservation.Service.Exception.WaitingException;
+import reservation.DTO.Exception.TokenUnavailableException;
+import reservation.DTO.Exception.WaitingException;
 
 @Service
 public class TicketService {

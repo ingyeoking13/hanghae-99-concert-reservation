@@ -4,14 +4,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import reservation.Repository.ticket.RedisTicketReaderRepository;
 import reservation.Repository.ticket.RedisTicketWriterRepository;
 import reservation.DTO.Ticket;
-import reservation.Service.Exception.TokenUnavailableException;
-import reservation.Service.Exception.WaitingException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import reservation.DTO.Exception.TokenUnavailableException;
+import reservation.DTO.Exception.WaitingException;
 
 class TicketServiceTest {
 
