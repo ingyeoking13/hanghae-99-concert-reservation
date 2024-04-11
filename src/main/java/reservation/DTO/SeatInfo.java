@@ -1,4 +1,4 @@
-package reservation.Controller.DTO;
+package reservation.DTO;
 
 import lombok.*;
 
@@ -10,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeatInfo {
-    private Show show;
+    private ConcertShow concertShow;
     private List<Seat> seats;
 }

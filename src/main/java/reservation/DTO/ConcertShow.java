@@ -1,4 +1,4 @@
-package reservation.Controller.DTO;
+package reservation.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public class Show extends Concert {
+public class ConcertShow extends Concert {
     @JsonProperty("datetime")
     private LocalDateTime dateTime;
-    private int point;
+    private int price;
 }

@@ -1,4 +1,4 @@
-package reservation.Controller.DTO;
+package reservation.DTO;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -9,5 +9,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 public class Concert {
+    private int id;
     private String name;
 }

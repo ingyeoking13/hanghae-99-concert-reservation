@@ -7,7 +7,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import reservation.Repository.ticket.RedisTicketReaderRepository;
 import reservation.Repository.ticket.RedisTicketWriterRepository;
-import reservation.Service.DTO.Ticket;
+import reservation.DTO.Ticket;
 import reservation.Service.Exception.TokenUnavailableException;
 import reservation.Service.Exception.WaitingException;
 
@@ -35,7 +35,7 @@ class TicketServiceTest {
         Mockito.doReturn(serviceName + "-" + userId)
                 .when(redisTicketWriterRepository).writeNewTicket(serviceName, userId);
         Ticket result = ticketService.supplyToken(serviceName, userId);
-        Assertions.assertThat(result.getTicketNumber()).isEqualTo(
+        Assertions.assertThat(result.getTicketId()).isEqualTo(
                 serviceName + '-' + userId
         );
     }

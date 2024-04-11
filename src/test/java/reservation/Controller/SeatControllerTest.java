@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
-import reservation.Controller.DTO.Seat;
-import reservation.Controller.DTO.SeatInfo;
-import reservation.Controller.DTO.Show;
+import reservation.DTO.Seat;
+import reservation.DTO.SeatInfo;
+import reservation.DTO.ConcertShow;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,12 +29,12 @@ class SeatControllerTest {
     void test_예약가능좌석조회() throws Exception {
         SeatInfo seatInfo = new SeatInfo();
 
-        Show show = Show.builder()
+        ConcertShow concertShow = ConcertShow.builder()
                 .point(1000)
                 .dateTime(LocalDateTime.MAX)
                 .name("test")
                 .build();
-        seatInfo.setShow(show);
+        seatInfo.setConcertShow(concertShow);
         List<Seat> seats = new ArrayList<>();
         seats.add(
                 Seat.builder()

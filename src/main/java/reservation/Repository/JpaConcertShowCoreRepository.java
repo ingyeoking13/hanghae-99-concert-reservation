@@ -3,8 +3,8 @@ package reservation.Repository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import reservation.DTO.ConcertShow;
 import reservation.Domain.Show;
-import reservation.Service.DTO.ConcertShow;
 
 import java.util.LinkedList;
 import java.util.List;

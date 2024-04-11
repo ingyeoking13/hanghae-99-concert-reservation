@@ -1,4 +1,4 @@
-package reservation.Controller.DTO;
+package reservation.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Seat {
-    @JsonProperty("seat_number")
-    private int seatNumber;
+public class Ticket {
+    @JsonProperty("ticket_id")
+    private String ticketId;
 }

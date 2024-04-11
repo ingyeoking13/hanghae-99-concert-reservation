@@ -3,15 +3,15 @@ package reservation.Controller.ticket;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reservation.Controller.DTO.ticket.TicketId;
+import reservation.DTO.Ticket;
 
 @RestController
 @RequestMapping("/ticket")
 public class TicketSeatController {
 
     @PostMapping("/seats")
-    public TicketId getSeatTicket() {
-        return TicketId
+    public Ticket getSeatTicket() {
+        return Ticket
                 .builder()
                 .ticketId("ticketId")
                 .build();

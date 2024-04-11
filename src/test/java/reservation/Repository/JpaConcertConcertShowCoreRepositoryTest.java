@@ -4,20 +4,20 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import reservation.DTO.ConcertShow;
 import reservation.Domain.Concert;
 import reservation.Domain.Show;
-import reservation.Service.DTO.ConcertShow;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-class JpaConcertShowCoreRepositoryTest {
+class JpaConcertConcertShowCoreRepositoryTest {
 
     @Autowired private JpaConcertShowCoreRepository jpaConcertShowCoreRepository;
     private final ConcertShowRepository concertShowRepository;
 
-    public JpaConcertShowCoreRepositoryTest(){
+    public JpaConcertConcertShowCoreRepositoryTest(){
         concertShowRepository = Mockito.mock(ConcertShowRepository.class);
         jpaConcertShowCoreRepository = new JpaConcertShowCoreRepository(
                 concertShowRepository
@@ -63,8 +63,8 @@ class JpaConcertShowCoreRepositoryTest {
         Assertions.assertThat(result.get(1).getName()).isEqualTo("bye");
         Assertions.assertThat(result.get(0).getPrice()).isEqualTo(1000);
         Assertions.assertThat(result.get(1).getPrice()).isEqualTo(2000);
-        Assertions.assertThat(result.get(0).getDatetime()).isEqualTo(LocalDateTime.MAX);
-        Assertions.assertThat(result.get(1).getDatetime()).isEqualTo(LocalDateTime.MAX);
+        Assertions.assertThat(result.get(0).getDateTime()).isEqualTo(LocalDateTime.MAX);
+        Assertions.assertThat(result.get(1).getDateTime()).isEqualTo(LocalDateTime.MAX);
 
     }
 }

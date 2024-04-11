@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
-import reservation.Controller.DTO.Show;
+import reservation.DTO.ConcertShow;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -27,16 +27,16 @@ class ConcertControllerTest {
 
     @Test
     void test_충전_티켓발급() throws Exception {
-        List<Show> shows = new ArrayList<>();
+        List<ConcertShow> concertShows = new ArrayList<>();
 
-        Show show = Show.builder()
+        ConcertShow concertShow = ConcertShow.builder()
                 .point(1000)
                 .dateTime(LocalDateTime.MAX)
                 .name("test")
                 .build();
-        shows.add( show );
+        concertShows.add(concertShow);
         final String result = objectMapper.writeValueAsString(
-                shows
+                concertShows
         );
 
         mockMvc.perform(get("/concerts"))

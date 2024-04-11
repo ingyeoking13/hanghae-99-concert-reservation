@@ -3,7 +3,7 @@ package reservation.Domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import reservation.Service.DTO.ConcertShow;
+import reservation.DTO.ConcertShow;
 
 import java.time.LocalDateTime;
 
@@ -33,7 +33,7 @@ public class Show {
         return ConcertShow.builder()
                 .name(this.name)
                 .price(this.price)
-                .datetime(this.dateTime)
-                .id(id).build();
+                .dateTime(this.dateTime)
+                .id(Integer.valueOf(id.toString())).build();
     }
 }

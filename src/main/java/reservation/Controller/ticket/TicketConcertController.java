@@ -4,8 +4,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reservation.Controller.DTO.ticket.TicketId;
-import reservation.Service.DTO.Ticket;
+import reservation.DTO.Ticket;
 import reservation.Service.TicketService;
 
 @RestController
@@ -14,11 +13,11 @@ public class TicketConcertController {
     TicketService ticketService;
 
     @PostMapping("/concert")
-    public TicketId getConcertTicket(@RequestHeader("Authorization") int user) {
-        Ticket result = ticketService.supplyToken("concert", user);
-        return TicketId
+    public Ticket getConcertTicket(@RequestHeader("Authorization") int user) {
+        reservation.DTO.Ticket result = ticketService.supplyToken("concert", user);
+        return Ticket
                 .builder()
-                .ticketId(result.getTicketNumber())
+                .ticketId(result.getTicketId())
                 .build();
     }
 }

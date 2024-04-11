@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reservation.Repository.ticket.TicketReaderRepository;
 import reservation.Repository.ticket.TicketWriterRepository;
-import reservation.Service.DTO.Ticket;
+import reservation.DTO.Ticket;
 import reservation.Service.Exception.TokenUnavailableException;
 import reservation.Service.Exception.WaitingException;
 
@@ -24,7 +24,7 @@ public class TicketService {
 
     public Ticket supplyToken(String serviceName, int userId){
         String result = ticketWriterRepository.writeNewTicket(serviceName, userId);
-        return Ticket.builder().ticketNumber(result).build();
+        return Ticket.builder().ticketId(result).build();
     }
 
     public boolean poolingWaitingQueue(String serviceName, String token) throws TokenUnavailableException, WaitingException {
