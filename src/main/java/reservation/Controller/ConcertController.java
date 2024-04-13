@@ -3,10 +3,7 @@ package reservation.Controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reservation.DTO.BaseResponse;
 import reservation.DTO.ConcertShow;
 import reservation.Service.ConcertShowService;
@@ -24,13 +21,11 @@ public class ConcertController {
     @Autowired
     private ConcertShowService concertShowService;
     @GetMapping("/concerts/{concert_id}")
-    @ExceptionHandler(value = { TokenUnavailableException.class, WaitingException.class})
     @Tag(name="")
     public List<ConcertShow> getConcerts (
             @RequestHeader("token_id") String tokenId,
-            @PathParam("concert_id") Long concertId) throws Exception {
-        List<ConcertShow> result = new LinkedList<>();
-        ticketService.poolingWaitingQueue("concert" , tokenId);
+            @PathVariable("concert_id") long concertId) throws Exception {
+        ticketService.poolingWaitingQueue("concert", tokenId);
 
         List<ConcertShow> concertShows = concertShowService.getAvailableConcertShow(concertId);
 
