@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import reservation.DTO.BaseResponse;
 import reservation.DTO.Exception.ResponseException;
 
+import java.util.LinkedHashMap;
+
 @RestControllerAdvice
 public class ResponseWrapper implements ResponseBodyAdvice<Object> {
     @Override
@@ -25,18 +27,20 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
                                   Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   ServerHttpRequest request,
                                   ServerHttpResponse response) {
-        String path = request.getURI().getPath();
-
-        if (body instanceof ResponseException responseException) {
-            response.setStatusCode(responseException.getStatus());
-
+        if (body instanceof LinkedHashMap) {
+            LinkedHashMap<?, ?> errorResponse = (LinkedHashMap<?, ?>) body;
             return BaseResponse.builder()
-                    .path(path)
-                    .result(responseException.getRejectedValues())
-                    .message(responseException.getMessage())
+                    .path((String) errorResponse.get("path"))
+                    .result("")
+                    .message((String) errorResponse.get("error"))
                     .build();
         }
 
+        if (body instanceof BaseResponse) {
+            return body;
+        }
+
+        String path = request.getURI().getPath();
         return BaseResponse.builder()
                 .path(path)
                 .result(body)
