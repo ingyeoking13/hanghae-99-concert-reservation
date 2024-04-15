@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import reservation.DTO.ConcertShow;
 import reservation.Domain.Show;
 import reservation.Repository.ConcertShowRepository;
-import reservation.Repository.JpaConcertShowCoreRepository;
 
 import java.util.LinkedList;
 import java.util.List;

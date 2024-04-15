@@ -1,5 +1,6 @@
 package reservation.Controller.ticket;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import reservation.Service.TicketService;
 @RestController
 @RequestMapping("/ticket")
 public class TicketConcertController {
+    @Autowired
     TicketService ticketService;
 
     @PostMapping("/concert")
