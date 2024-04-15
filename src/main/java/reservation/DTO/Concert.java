@@ -9,6 +9,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 public class Concert {
-    private int id;
+    private long id;
     private String name;
 }

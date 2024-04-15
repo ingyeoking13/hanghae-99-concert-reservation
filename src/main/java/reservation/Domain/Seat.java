@@ -13,11 +13,11 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
-    private int seat_number;
+    @Column(name="seat_number")
+    private int seatNumber;
 
-    @Column
-    private String occupied_status;
+    @Column(name="occupied_status")
+    private String occupiedStatus;
 
     @Column
     @Version
@@ -26,4 +26,12 @@ public class Seat {
     @ManyToOne
     @JoinColumn(name="show_id")
     private Show concertShow;
+
+    public reservation.DTO.Seat toSeatDTO(){
+        return  reservation.DTO.Seat.builder()
+                .id(this.id)
+                .seatNumber(this.seatNumber)
+                .occupiedStatus(this.occupiedStatus)
+                .build();
+    }
 }

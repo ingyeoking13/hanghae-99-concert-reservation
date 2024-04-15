@@ -1,6 +1,5 @@
 package reservation.Repository;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import reservation.DTO.ConcertShow;
@@ -22,5 +21,9 @@ public class JpaConcertShowCoreRepository {
                 (show)-> result.add(show.toConcertShow())
         );
         return result;
+    }
+
+    public Show findById(long showId){
+        return concertShowRepository.findById(showId).get();
     }
 }
