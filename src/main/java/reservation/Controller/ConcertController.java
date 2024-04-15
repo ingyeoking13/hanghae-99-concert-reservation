@@ -17,18 +17,11 @@ import java.util.List;
 @RestController
 public class ConcertController {
     @Autowired
-    private TicketService ticketService;
-    @Autowired
     private ConcertShowService concertShowService;
     @GetMapping("/concerts/{concert_id}")
     @Tag(name="")
-    public List<ConcertShow> getConcerts (
-            @RequestHeader("token_id") String tokenId,
-            @PathVariable("concert_id") long concertId) throws Exception {
-        ticketService.poolingWaitingQueue("concert", tokenId);
-
+    public List<ConcertShow> getConcerts (@PathVariable("concert_id") long concertId) {
         List<ConcertShow> concertShows = concertShowService.getAvailableConcertShow(concertId);
-
         return concertShows;
     }
 }

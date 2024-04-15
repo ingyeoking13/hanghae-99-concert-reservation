@@ -43,10 +43,10 @@ class TicketServiceTest {
         String serviceName = "test";
         String token = "test-1";
         Mockito.doReturn(-1L).when(redisTicketReaderRepository).readWaitingNumber(
-                serviceName, token
+                token
         );
         Assertions.assertThatThrownBy(
-                () ->ticketService.poolingWaitingQueue(serviceName,token)
+                () ->ticketService.poolingWaitingQueue(token)
         ).isInstanceOf(TokenUnavailableException.class);
     }
 
@@ -57,10 +57,10 @@ class TicketServiceTest {
         long expectResult = 10000L;
         int poolSize = 50;
         Mockito.doReturn(expectResult).when(redisTicketReaderRepository).readWaitingNumber(
-                serviceName, token
+                token
         );
         Assertions.assertThatThrownBy(
-                () ->ticketService.poolingWaitingQueue(serviceName,token)
+                () ->ticketService.poolingWaitingQueue(token)
         ).isInstanceOf(WaitingException.class).hasFieldOrPropertyWithValue(
                 "waitingNumber",(int) expectResult - poolSize
         );
@@ -72,10 +72,10 @@ class TicketServiceTest {
         String token = "test-1";
         long expectResult = 1L;
         Mockito.doReturn(expectResult).when(redisTicketReaderRepository).readWaitingNumber(
-                serviceName, token
+                token
         );
         Assertions.assertThat(
-                ticketService.poolingWaitingQueue(serviceName,token)
+                ticketService.poolingWaitingQueue(token)
         ).isEqualTo(true);
     }
 }

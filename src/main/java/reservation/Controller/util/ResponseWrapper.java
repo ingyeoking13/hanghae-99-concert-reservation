@@ -32,7 +32,7 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
             return BaseResponse.builder()
                     .path((String) errorResponse.get("path"))
                     .result("")
-                    .message((String) errorResponse.get("error"))
+                    .message((String) errorResponse.get("message"))
                     .build();
         }
 

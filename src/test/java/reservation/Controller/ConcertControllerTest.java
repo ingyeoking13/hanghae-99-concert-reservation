@@ -41,7 +41,7 @@ class ConcertControllerTest {
         concertShows.add(concertShow);
         Mockito.doReturn(
                 true
-        ).when(ticketService).poolingWaitingQueue("test", "test-1");
+        ).when(ticketService).poolingWaitingQueue("test-1");
         Mockito.doReturn(concertShows).when(concertShowService).getAvailableConcertShow(
                 1L
         );

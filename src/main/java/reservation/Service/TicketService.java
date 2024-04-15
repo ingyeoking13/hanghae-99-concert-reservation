@@ -27,13 +27,13 @@ public class TicketService {
         return Ticket.builder().ticketId(result).build();
     }
 
-    public boolean poolingWaitingQueue(String serviceName, String token) throws TokenUnavailableException, WaitingException {
-        long result = ticketReaderRepository.readWaitingNumber(serviceName, token);
+    public boolean poolingWaitingQueue(String token) throws TokenUnavailableException, WaitingException {
+        long result = ticketReaderRepository.readWaitingNumber(token);
         if (result < 0) {
             throw new TokenUnavailableException();
         }
-        if (result > poolSize) {
-            throw new WaitingException((int)(result - poolSize));
+        if (result != 0) {
+            throw new WaitingException((int)(result));
         }
         return true;
     }

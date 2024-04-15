@@ -19,13 +19,13 @@ class RedisTicketRepositoryTest {
         ticketWriterRepository.writeNewTicket("test", 3);
 
         // when
-        Long res1 = ticketReaderRepository.readWaitingNumber("test", "test-1");
-        Long res2 = ticketReaderRepository.readWaitingNumber("test", "test-2");
-        Long res3 = ticketReaderRepository.readWaitingNumber("test", "test-3");
+        Long res1 = ticketReaderRepository.readWaitingNumber("test-1");
+        Long res2 = ticketReaderRepository.readWaitingNumber("test-2");
+        Long res3 = ticketReaderRepository.readWaitingNumber("test-3");
 
         // then
-        Assertions.assertThat(res1).isEqualTo(1);
-        Assertions.assertThat(res2).isEqualTo(2);
-        Assertions.assertThat(res3).isEqualTo(3);
+        Assertions.assertThat(res1).isEqualTo(0);
+        Assertions.assertThat(res2).isEqualTo(1);
+        Assertions.assertThat(res3).isEqualTo(2);
     }
 }

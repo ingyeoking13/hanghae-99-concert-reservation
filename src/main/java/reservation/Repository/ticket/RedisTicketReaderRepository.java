@@ -24,13 +24,13 @@ public class RedisTicketReaderRepository implements TicketReaderRepository{
         this.valueOperation = this.ticketRedisTemplate.opsForValue();
     }
     @Override
-    public long readWaitingNumber(String serviceName, String token) {
-        String value = this.valueOperation.get(token);
+    public long readWaitingNumber(String token) {
+        String value = this.valueOperation.getAndDelete(token);
         if (value == null) {
             return -1L;
         }
         this.valueOperation.set(token, "0", Duration.ofMinutes(5));
         Long rank = this.zSetOperations.rank(rankKey,token);
-        return rank + 1;
+        return rank;
     }
 }
