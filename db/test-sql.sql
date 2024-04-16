@@ -10,3 +10,5 @@ insert into seat_info (id, seat_number, occupied_status, version, show_id) value
 insert into seat_info (id, seat_number, occupied_status, version, show_id) values(5, 5, "EMPTY", 0, 1 );
 insert into seat_info (id, seat_number, occupied_status, version, show_id) values(6, 6, "EMPTY", 0, 1 );
 insert into seat_info (id, seat_number, occupied_status, version, show_id) values(7, 7, "EMPTY", 0, 1 );
+
+insert into user (id) values(1);

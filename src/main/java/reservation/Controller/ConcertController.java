@@ -19,7 +19,6 @@ public class ConcertController {
     @Autowired
     private ConcertShowService concertShowService;
     @GetMapping("/concerts/{concert_id}")
-    @Tag(name="")
     public List<ConcertShow> getConcerts (@PathVariable("concert_id") long concertId) {
         List<ConcertShow> concertShows = concertShowService.getAvailableConcertShow(concertId);
         return concertShows;

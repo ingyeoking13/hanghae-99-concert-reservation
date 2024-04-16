@@ -16,10 +16,19 @@ public class JpaSeatInfoCoreRepository {
         return seat;
     }
 
-    public boolean reserveSeat(long seatId) {
+    public Seat reserveSeat(long seatId) {
         Optional<Seat> seat = seatInfoRepository.findById(seatId);
         Seat _seat = seat.get();
-        _seat.setOccupiedStatus("Reserved");
-        return true;
+        String status = _seat.getOccupiedStatus();
+        if (!status.equalsIgnoreCase("Empty")) {
+            return null;
+        }
+        _seat.setOccupiedStatus("PreReserved");
+        seatInfoRepository.save(_seat);
+        return _seat;
     };
+
+    public Seat findById(long seatId){
+        return seatInfoRepository.findById(seatId).get();
+    }
 }
