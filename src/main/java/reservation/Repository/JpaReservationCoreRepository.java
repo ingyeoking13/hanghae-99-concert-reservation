@@ -17,11 +17,22 @@ public class JpaReservationCoreRepository {
                     .seatNumber(seat.getSeatNumber())
                     .show(show)
                     .showName(show.getName())
-                    .user( user )
+                    .user(user)
                     .payment(show.getPrice())
                     .build();
+        reservation.getSeat().setOccupiedStatus("Reserved");
+        reservation.setPayment(show.getPrice());
         reservationRepository.save( reservation );
         return true;
     }
 
+    public Reservation savePaymentReservationInfo(Long reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId).get();
+        reservationRepository.save( reservation );
+        return reservation;
+    }
+
+    public Reservation findById(Long id) {
+        return reservationRepository.findById(id).get();
+    }
 }

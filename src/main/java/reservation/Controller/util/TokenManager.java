@@ -1,12 +1,11 @@
 package reservation.Controller.util;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
 public class TokenManager {
 
     public String getUserId(String token) {
