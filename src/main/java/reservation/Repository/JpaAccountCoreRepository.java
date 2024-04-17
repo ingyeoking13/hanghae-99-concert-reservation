@@ -24,6 +24,19 @@ public class JpaAccountCoreRepository {
         return accountRepository.findByUser_Id(userId).get();
     }
 
+    public int getAmountByUserId(Long userId) {
+        Account account = this.findByUserId(userId);
+        return account.getAmount();
+    }
+
+    @Transactional
+    @Lock(LockModeType.OPTIMISTIC)
+    public boolean chargeAmount(Long userId, int amount) {
+        Account account = this.findByUserId(userId);
+        account.setAmount(account.getAmount() + amount);
+        return true;
+    }
+
     @Transactional
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     public Account decreaseAmountFromAccount(Long userId, int amount) {
