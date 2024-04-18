@@ -8,18 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import reservation.DTO.BaseResponse;
 import reservation.DTO.ConcertShow;
 import reservation.Service.ConcertShowService;
 import reservation.Service.TicketService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(ConcertController.class)
 class ConcertControllerTest {
@@ -42,13 +44,12 @@ class ConcertControllerTest {
         Mockito.doReturn(
                 true
         ).when(ticketService).poolingWaitingQueue("test-1");
-        Mockito.doReturn(concertShows).when(concertShowService).getAvailableConcertShow(
-                1L
-        );
+        Mockito.doReturn(concertShows).when(concertShowService).getAvailableConcertShow(1L);
 
-        final String result = objectMapper.writeValueAsString(
-                concertShows
-        );
+        BaseResponse<List<ConcertShow>> result_ = new BaseResponse<>();
+        result_.setResult(concertShows);
+
+        final String result = objectMapper.writeValueAsString( result_ );
 
         // then
         mockMvc.perform(get("/concerts/1")
@@ -56,7 +57,7 @@ class ConcertControllerTest {
                         .header( "token_id", 1)
                 )
                 .andExpect(status().isOk())
-                .andExpect(content().json(result));
+                .andExpect(content().json(result, true));
     }
 
 }

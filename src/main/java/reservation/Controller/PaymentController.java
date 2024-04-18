@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+import reservation.Controller.util.TokenManager;
 import reservation.DTO.Request.Payment;
 import reservation.Service.PaymentService;
 
@@ -16,7 +17,9 @@ public class PaymentController {
     public boolean postPayment(
             @RequestHeader("token_id") String tokenId,
             @RequestBody Payment payment) throws Exception {
-        paymentService.payForPreReservedSeat(payment.getAmount(), tokenId);
+        TokenManager tm = new TokenManager();
+        Long userId = Long.valueOf(tm.getUserId(tokenId));
+        paymentService.payForPreReservedSeat(payment.getAmount(), userId);
         return true;
     }
 

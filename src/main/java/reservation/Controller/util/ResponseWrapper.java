@@ -40,9 +40,7 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
             return body;
         }
 
-        String path = request.getURI().getPath();
         return BaseResponse.builder()
-                .path(path)
                 .result(body)
                 .build();
     }
