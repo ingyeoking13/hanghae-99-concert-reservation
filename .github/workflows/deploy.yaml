@@ -23,7 +23,7 @@ jobs:
         env:
           ENV: ${{ secrets.ENV_PROD }}
         run: |
-          echo $ENV
-          echo $ENV > src/main/resources/application.yml
+          echo ${{ env.TEST }}
+          echo ${{ env.TEST }} > src/main/resources/application.yml
           ./gradlew build -x test
 #          RUNNER_TRACKING_ID="" && ls build/libs/*SNAPSHOT.jar | xargs -I{} java -jar {} --spring.profiles.active=prod &
