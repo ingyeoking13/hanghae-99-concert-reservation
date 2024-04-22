@@ -24,6 +24,7 @@ jobs:
           ENV: ${{ secrets.ENV_PROD }}
         run: |
           echo "$ENV"
+          pwd
           echo "$ENV" > src/main/resources/application.yml
           ls src/main/resources
           
