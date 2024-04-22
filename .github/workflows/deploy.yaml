@@ -25,5 +25,7 @@ jobs:
         run: |
           mkdir src/main/resources
           echo "$ENV" > src/main/resources/application.yml
-          ./gradlew build -x test
+          export SHORT_SHA=$(echo ${{ github.sha }} | cut -c 1-8)
+          docker build . -t reservation:$SHORT_SHA -f Dockerfile
+#          ./gradlew build -x test
 #          RUNNER_TRACKING_ID="" && ls build/libs/*SNAPSHOT.jar | xargs -I{} java -jar {} --spring.profiles.active=prod &
