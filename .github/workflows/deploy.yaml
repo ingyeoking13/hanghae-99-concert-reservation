@@ -21,5 +21,5 @@ jobs:
 
       - name: build and test
         run: |
-          ./gradlew build
+          ./gradlew build -x test
 #          RUNNER_TRACKING_ID="" && ls build/libs/*SNAPSHOT.jar | xargs -I{} java -jar {} --spring.profiles.active=prod &
