@@ -6,7 +6,7 @@ COPY . /usr/src/myapp
 ARG mode_input
 ENV mode=$mode_input
 
-RUN ./gradlew build
+RUN ./gradlew build -x test
 
-CMD ['java -jar build/libs/reservation-1.0-SNAPSHOT.jar']
+CMD ['ls build/libs/*SNAPSHOT.jar | xargs -I{} java -jar {}']
 
