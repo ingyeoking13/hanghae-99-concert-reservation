@@ -19,9 +19,7 @@ class JpaConcertConcertShowCoreRepositoryTest {
 
     public JpaConcertConcertShowCoreRepositoryTest(){
         concertShowRepository = Mockito.mock(ConcertShowRepository.class);
-        jpaConcertShowCoreRepository = new JpaConcertShowCoreRepository(
-                concertShowRepository
-        );
+        jpaConcertShowCoreRepository = new JpaConcertShowCoreRepository();
     }
 
     List<Show> createConcertTestData() {

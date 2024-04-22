@@ -1,6 +1,7 @@
 package reservation.Repository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import reservation.DTO.ConcertShow;
 import reservation.Domain.Show;
@@ -9,9 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
 public class JpaConcertShowCoreRepository {
-    private final ConcertShowRepository concertShowRepository;
+    @Autowired private ConcertShowRepository concertShowRepository;
 
 
     public List<ConcertShow> getAllConcertShowByConcertId(Long concertId) {
