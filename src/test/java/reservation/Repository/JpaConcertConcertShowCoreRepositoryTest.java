@@ -2,8 +2,10 @@ package reservation.Repository;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import reservation.DTO.ConcertShow;
 import reservation.Domain.Concert;
 import reservation.Domain.Show;
@@ -15,11 +17,12 @@ import java.util.List;
 class JpaConcertConcertShowCoreRepositoryTest {
 
     @Autowired private JpaConcertShowCoreRepository jpaConcertShowCoreRepository;
-    private final ConcertShowRepository concertShowRepository;
+    @Mock
+    private ConcertShowRepository concertShowRepository;
 
     public JpaConcertConcertShowCoreRepositoryTest(){
         concertShowRepository = Mockito.mock(ConcertShowRepository.class);
-        jpaConcertShowCoreRepository = new JpaConcertShowCoreRepository();
+        jpaConcertShowCoreRepository = new JpaConcertShowCoreRepository(concertShowRepository);
     }
 
     List<Show> createConcertTestData() {

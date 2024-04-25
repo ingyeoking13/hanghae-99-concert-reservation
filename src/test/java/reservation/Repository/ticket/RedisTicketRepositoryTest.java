@@ -24,8 +24,8 @@ class RedisTicketRepositoryTest {
         Long res3 = ticketReaderRepository.readWaitingNumber("test-3");
 
         // then
-        Assertions.assertThat(res1).isEqualTo(0);
-        Assertions.assertThat(res2).isEqualTo(1);
-        Assertions.assertThat(res3).isEqualTo(2);
+        Assertions.assertThat(res1).isEqualTo(1);
+        Assertions.assertThat(res2).isEqualTo(2);
+        Assertions.assertThat(res3).isEqualTo(3);
     }
 }

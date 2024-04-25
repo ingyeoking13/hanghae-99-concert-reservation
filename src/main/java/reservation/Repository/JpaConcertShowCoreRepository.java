@@ -1,5 +1,6 @@
 package reservation.Repository;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,7 +11,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Repository
+@AllArgsConstructor
 public class JpaConcertShowCoreRepository {
+
     @Autowired private ConcertShowRepository concertShowRepository;
 
 

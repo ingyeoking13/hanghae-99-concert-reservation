@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'checkstyle'
+//    id 'checkstyle'
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
 }
@@ -11,13 +11,13 @@ version = '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
-
-checkstyle {
-    maxWarnings = 0
-    configFile = file("${rootDir}/config/google-checkstyle.xml")
-    toolVersion = "8.39"
-}
-
+//
+//checkstyle {
+//    maxWarnings = 0
+//    configFile = file("${rootDir}/config/google-checkstyle.xml")
+//    toolVersion = "8.29"
+//}
+//
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'

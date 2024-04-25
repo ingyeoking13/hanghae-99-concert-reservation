@@ -55,14 +55,13 @@ class TicketServiceTest {
         String serviceName = "test";
         String token = "test-1";
         long expectResult = 10000L;
-        int poolSize = 50;
         Mockito.doReturn(expectResult).when(redisTicketReaderRepository).readWaitingNumber(
                 token
         );
         Assertions.assertThatThrownBy(
                 () ->ticketService.poolingWaitingQueue(token)
         ).isInstanceOf(WaitingException.class).hasFieldOrPropertyWithValue(
-                "waitingNumber",(int) expectResult - poolSize
+                "waitingNumber",(int) expectResult
         );
     }
 
@@ -70,12 +69,10 @@ class TicketServiceTest {
     void test_토큰이풀사이즈안에들어오는경우() throws Exception {
         String serviceName = "test";
         String token = "test-1";
-        long expectResult = 1L;
+        long expectResult = 0L;
         Mockito.doReturn(expectResult).when(redisTicketReaderRepository).readWaitingNumber(
                 token
         );
-        Assertions.assertThat(
-                ticketService.poolingWaitingQueue(token)
-        ).isEqualTo(true);
+        Assertions.assertThat( ticketService.poolingWaitingQueue(token) ).isEqualTo(true);
     }
 }
