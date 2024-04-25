@@ -11,8 +11,7 @@ import reservation.Service.TicketService;
 @RestController
 @RequestMapping("/ticket")
 public class TicketPaymentController {
-    @Autowired
-    TicketService ticketService;
+    @Autowired private TicketService ticketService;
     @PostMapping("/payment")
     public Ticket getPaymentTicket(@RequestHeader("Authorization") int user) {
         reservation.DTO.Ticket result = ticketService.supplyToken("payment", user);
