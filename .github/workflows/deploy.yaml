@@ -26,7 +26,6 @@ jobs:
           PROD_ENV: ${{ secrets.ENV_PROD }}
           DEV_ENV: ${{ secrets.ENV_DEV }}
         run: |
-          mkdir src/main/resources
           if [[ $GITHUB_REF_NAME == 'main' ]]; then
             echo "$PROD_ENV" > src/main/resources/application.yml
           else
