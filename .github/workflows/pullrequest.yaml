@@ -29,6 +29,7 @@ jobs:
       - name: Set up Docker
         run: |
           sudo service docker start
+          sudo /etc/init.d/docker start
 
       - name: build and test
         uses: actions/setup-java@v3
@@ -40,7 +41,6 @@ jobs:
         env:
           PROD_ENV: ${{ secrets.ENV_PROD }}
           DEV_ENV: ${{ secrets.ENV_DEV }}
-          DOCKER_HOST: tcp://localhost:2375
         run: |
           if [[ $GITHUB_REF_NAME == 'main' ]]; then
             echo "$PROD_ENV" > src/main/resources/application.yml
