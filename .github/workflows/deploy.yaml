@@ -26,7 +26,6 @@ jobs:
         env:
           PROD_ENV: ${{ secrets.ENV_PROD }}
           DEV_ENV: ${{ secrets.ENV_DEV }}
-          DOCKER_HOST: tcp://localhost:2375
         run: |
           if [[ $GITHUB_REF_NAME == 'main' ]]; then
             echo "$PROD_ENV" > src/main/resources/application.yml
