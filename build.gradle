@@ -11,6 +11,10 @@ version = '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+
+ext {
+    set('testcontainersVersion', "1.17.4")
+}
 //
 //checkstyle {
 //    maxWarnings = 0
@@ -25,6 +29,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'mysql:mysql-connector-java:8.0.32'
+    testImplementation "org.testcontainers:junit-jupiter"
+    testImplementation "org.testcontainers:mysql" // mysql 컨테이너를 사용한다면 추가
+    testImplementation "org.testcontainers:testcontainers:1.19.7"
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
@@ -35,4 +42,10 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+    }
 }

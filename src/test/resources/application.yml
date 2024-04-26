@@ -1,0 +1,33 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:mysql:8.0:///test_container_test
+    username: root
+    password: adkb
+  #    initialization-mode: always
+
+  jpa:
+    show-sql: true         # 쿼리를 표준 출력으로
+    properties:
+      hibernate:
+        format_sql: true  # 아름답게 출력
+    hibernate:
+      ddl-auto: create # 서버 기동시마다 테이블을 drop - create - insert 를 한다
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+
+  redis:
+    host: localhost
+    port: 6379
+    maxmemory: 128M
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always

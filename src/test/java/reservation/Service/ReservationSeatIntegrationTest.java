@@ -7,13 +7,36 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.testcontainers.containers.MySQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 @SpringBootTest
+@ActiveProfiles("test")
+@Testcontainers
 public class ReservationSeatIntegrationTest {
+  @Container
+  static MySQLContainer mySQLContainer = new MySQLContainer("mysql:8");
   @Autowired ReservationService reservationService;
+
+  @BeforeEach
+  void setUp(){
+    mySQLContainer.withExposedPorts(3306).start();
+  }
+
+  @AfterEach
+  void afterSetUp(){
+    mySQLContainer.stop();
+  }
+
 
   @Test
   void test_좌석동시예약(){
