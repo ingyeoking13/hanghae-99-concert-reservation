@@ -13,6 +13,13 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:19.03.12-dind
+        options: --privileged
+        ports:
+          - 2375:2375
+
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -27,6 +34,7 @@ jobs:
         env:
           PROD_ENV: ${{ secrets.ENV_PROD }}
           DEV_ENV: ${{ secrets.ENV_DEV }}
+          DOCKER_HOST: tcp://localhost:2375
         run: |
           if [[ $GITHUB_REF_NAME == 'main' ]]; then
             echo "$PROD_ENV" > src/main/resources/application.yml
