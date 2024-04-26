@@ -3,11 +3,10 @@ spring:
     activate:
       on-profile: test
   datasource:
-    #    driver-class-name: com.mysql.cj.jdbc.Driver
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
     url: jdbc:tc:mysql:8.0:///test_container_test
     username: root
-    password: adkb
+    password: password
   #    initialization-mode: always
 
   jpa:

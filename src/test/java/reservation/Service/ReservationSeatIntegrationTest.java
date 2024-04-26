@@ -24,19 +24,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 public class ReservationSeatIntegrationTest {
   @Container
-  static MySQLContainer mySQLContainer = new MySQLContainer("mysql:8");
+  static MySQLContainer mySQLContainer = new MySQLContainer("mysql:8.0");
   @Autowired ReservationService reservationService;
-
-  @BeforeEach
-  void setUp(){
-    mySQLContainer.withExposedPorts(3306).start();
-  }
-
-  @AfterEach
-  void afterSetUp(){
-    mySQLContainer.stop();
-  }
-
 
   @Test
   void test_좌석동시예약(){
