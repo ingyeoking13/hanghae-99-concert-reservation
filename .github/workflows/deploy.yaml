@@ -11,12 +11,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:19.03.12-dind
-        options: --privileged
-        ports:
-          - 2375:2375
 
     steps:
       - name: checkout
