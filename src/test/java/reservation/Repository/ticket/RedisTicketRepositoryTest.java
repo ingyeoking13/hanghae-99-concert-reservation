@@ -1,6 +1,7 @@
 package reservation.Repository.ticket;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.testcontainers.utility.DockerImageName;
 
 @SpringBootTest
 @ActiveProfiles("test")
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 class RedisTicketRepositoryTest {
 
     GenericContainer redisContainer;
@@ -29,6 +29,11 @@ class RedisTicketRepositoryTest {
         redisContainer.start();
         System.setProperty("spring.data.redis.host", redisContainer.getHost());
         System.setProperty("spring.data.redis.port", String.valueOf(redisContainer.getMappedPort(6379)));
+    }
+
+    @AfterEach
+    public void afterEach() {
+        redisContainer.stop();
     }
 
     @Test
