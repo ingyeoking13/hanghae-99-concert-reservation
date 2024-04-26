@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -24,7 +25,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 public class ReservationSeatIntegrationTest {
   @Container
-  static MySQLContainer mySQLContainer = new MySQLContainer("mysql:8.0");
+  static GenericContainer mySQLContainer = new MySQLContainer("mysql:8.0").withReuse(true);
   @Autowired ReservationService reservationService;
 
   @Test
