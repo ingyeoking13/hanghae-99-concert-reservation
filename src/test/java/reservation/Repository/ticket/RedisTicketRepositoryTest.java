@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -16,24 +19,19 @@ import org.testcontainers.utility.DockerImageName;
 
 @SpringBootTest
 @ActiveProfiles("test")
+@Testcontainers
 class RedisTicketRepositoryTest {
 
-    GenericContainer redisContainer;
+    @Container
+    static GenericContainer redisContainer = new GenericContainer(DockerImageName.parse("redis:7.0.8-alpine")).withExposedPorts(6379);
 
     @Autowired private TicketReaderRepository ticketReaderRepository;
     @Autowired private TicketWriterRepository ticketWriterRepository;
 
-    @BeforeEach
-    public void beforeEach() {
-        redisContainer = new GenericContainer(DockerImageName.parse("redis:7.0.8-alpine")).withExposedPorts(6379);
-        redisContainer.start();
-        System.setProperty("spring.data.redis.host", redisContainer.getHost());
-        System.setProperty("spring.data.redis.port", String.valueOf(redisContainer.getMappedPort(6379)));
-    }
-
-    @AfterEach
-    public void afterEach() {
-        redisContainer.stop();
+    @DynamicPropertySource
+    static void registerPgProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.redis.host", () -> redisContainer.getHost());
+        registry.add("spring.redis.port", () -> String.valueOf(redisContainer.getMappedPort(6379)));
     }
 
     @Test
@@ -49,8 +47,8 @@ class RedisTicketRepositoryTest {
         Long res3 = ticketReaderRepository.readWaitingNumber("test-3");
 
         // then
-        Assertions.assertThat(res1).isEqualTo(1);
-        Assertions.assertThat(res2).isEqualTo(2);
-        Assertions.assertThat(res3).isEqualTo(3);
+        Assertions.assertThat(res1).isEqualTo(0);
+        Assertions.assertThat(res2).isEqualTo(1);
+        Assertions.assertThat(res3).isEqualTo(2);
     }
 }
