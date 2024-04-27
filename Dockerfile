@@ -1,12 +1,15 @@
 FROM openjdk:17
 
-WORKDIR /usr/src/myapp
-COPY . /usr/src/myapp
 
 ARG mode_input
 ENV mode=$mode_input
 
-RUN ./gradlew build
+ENV TZ=Asia/Seoul
 
-CMD ['ls build/libs/*SNAPSHOT.jar | xargs -I{} java -jar {}']
+COPY build/libs/reservation-0.0.1-SNAPSHOT.jar /app/reservation-0.0.1.jar
 
+EXPOSE 9000
+
+ENTRYPOINT java \
+  -jar /app/reservation-0.0.1.jar \
+  --spring.profiles.active=${PROFILE} \
