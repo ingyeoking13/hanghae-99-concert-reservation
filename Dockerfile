@@ -6,10 +6,10 @@ ENV mode=$mode_input
 
 ENV TZ=Asia/Seoul
 
-COPY build/libs/reservation-0.0.1-SNAPSHOT.jar /app/reservation-0.0.1.jar
+COPY build/libs/reservation-1.0-SNAPSHOT.jar /app/reservation-1.0-SNAPSHOT.jar
 
 EXPOSE 9000
 
 ENTRYPOINT java \
-  -jar /app/reservation-0.0.1.jar \
+  -jar /app/reservation-1.0-SNAPSHOT.jar \
   --spring.profiles.active=${PROFILE} \
