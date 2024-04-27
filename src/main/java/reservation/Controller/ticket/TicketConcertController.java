@@ -11,8 +11,12 @@ import reservation.Service.TicketService;
 @RestController
 @RequestMapping("/ticket")
 public class TicketConcertController {
-    @Autowired
-    TicketService ticketService;
+
+    @Autowired private final TicketService ticketService;
+
+    public TicketConcertController(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
 
     @PostMapping("/concert")
     public Ticket getConcertTicket(@RequestHeader("Authorization") int user) {

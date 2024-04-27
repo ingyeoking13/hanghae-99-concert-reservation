@@ -24,3 +24,16 @@ https://chip-supernova-606.notion.site/API-bb97038b80ce4c989322e4fb0452e900?pvs=
 
 https://chip-supernova-606.notion.site/67b0252bb3bd4b28aa315e647e524b0a?pvs=4
 
+# ci/cd 
+
+## 운영 / 개발 환경 
+
+- develop, prod로 운영
+
+## git flow & github workflow
+ 
+- main -> 
+- develop  ->  
+- feature/** ->
+
+
