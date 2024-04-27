@@ -19,8 +19,6 @@ jobs:
         options: --privileged
         ports:
           - 2375:2375
-        env:
-          DOCKER_TLS_CERTDIR: ''
 
     steps:
       - name: checkout
@@ -28,7 +26,6 @@ jobs:
 
       - name: Set up Docker
         run: |
-          sudo service docker start
           sudo /etc/init.d/docker start
 
       - name: build and test
