@@ -40,5 +40,8 @@ https://chip-supernova-606.notion.site/67b0252bb3bd4b28aa315e647e524b0a?pvs=4
 
 - 좌석 예약 : 낙관적 락 을 이용하여 동시성 제어. 선점으로 `한 건만 성공`하여도 상관 없으므로 낙관적 락을 이용하였습니다.  
 - 금액 충전 및 사용 : 분산 락을 이용하여 비관적인 락과 같은 동작을 기대하여 구현. 비관락을 사용하지 않는 이유는 DB 부하를 줄이기 위함.
+참고문서 : https://helloworld.kurly.com/blog/distributed-redisson-lock/
+
+이슈 : DistributedLock 어노테이션에 디버그 포인트가 잡히지 않고 락이 잡히지 않음 ㅠㅠ..
 
 
