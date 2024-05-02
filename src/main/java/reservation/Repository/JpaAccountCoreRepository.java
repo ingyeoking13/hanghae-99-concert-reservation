@@ -29,8 +29,6 @@ public class JpaAccountCoreRepository {
         return account.getAmount();
     }
 
-    @Transactional
-    @Lock(LockModeType.OPTIMISTIC)
     public boolean chargeAmount(Long userId, int amount) {
         Account account = this.findByUserId(userId);
         account.setAmount(account.getAmount() + amount);
