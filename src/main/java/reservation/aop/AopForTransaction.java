@@ -1,4 +1,4 @@
-package reservation.AOP;
+package reservation.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;

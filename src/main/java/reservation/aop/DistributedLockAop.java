@@ -1,4 +1,4 @@
-package reservation.AOP;
+package reservation.aop;
 
 import java.lang.reflect.Method;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +9,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 @Aspect
 @RequiredArgsConstructor
 @Slf4j
@@ -21,7 +22,7 @@ public class DistributedLockAop {
   private final RedissonClient redissonClient;
   private final AopForTransaction aopForTransaction;
 
-  @Around("@annotation(DistributedLock)")
+  @Around("@annotation(reservation.aop.DistributedLock)")
   public Object lock(final ProceedingJoinPoint joinPoint) throws Throwable {
     MethodSignature signature = (MethodSignature) joinPoint.getSignature();
     Method method = signature.getMethod();
