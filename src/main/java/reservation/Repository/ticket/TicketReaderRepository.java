@@ -4,5 +4,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TicketReaderRepository {
-    long readWaitingNumber(String token);
+    long peekWaitingNumber(String token);
+    long readAndDeleteWaitingNumber(String token);
 }

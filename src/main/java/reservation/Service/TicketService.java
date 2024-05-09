@@ -1,5 +1,6 @@
 package reservation.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reservation.Repository.ticket.TicketReaderRepository;
@@ -9,6 +10,7 @@ import reservation.DTO.Exception.TokenUnavailableException;
 import reservation.DTO.Exception.WaitingException;
 
 @Service
+@Slf4j
 public class TicketService {
 
     @Autowired TicketReaderRepository ticketReaderRepository;
@@ -28,8 +30,10 @@ public class TicketService {
     }
 
     public boolean poolingWaitingQueue(String token) throws TokenUnavailableException, WaitingException {
-        long result = ticketReaderRepository.readWaitingNumber(token);
+        long result = ticketReaderRepository.readAndDeleteWaitingNumber(token);
+        log.info("VALLL");
         if (result < 0) {
+            log.info(result + "00");
             throw new TokenUnavailableException();
         }
         if (result != 0) {

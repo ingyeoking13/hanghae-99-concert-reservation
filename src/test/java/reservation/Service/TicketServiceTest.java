@@ -42,7 +42,7 @@ class TicketServiceTest {
     void test_토큰이없는경우() {
         String serviceName = "test";
         String token = "test-1";
-        Mockito.doReturn(-1L).when(redisTicketReaderRepository).readWaitingNumber(
+        Mockito.doReturn(-1L).when(redisTicketReaderRepository).readAndDeleteWaitingNumber(
                 token
         );
         Assertions.assertThatThrownBy(
@@ -55,7 +55,7 @@ class TicketServiceTest {
         String serviceName = "test";
         String token = "test-1";
         long expectResult = 10000L;
-        Mockito.doReturn(expectResult).when(redisTicketReaderRepository).readWaitingNumber(
+        Mockito.doReturn(expectResult).when(redisTicketReaderRepository).readAndDeleteWaitingNumber(
                 token
         );
         Assertions.assertThatThrownBy(
@@ -70,7 +70,7 @@ class TicketServiceTest {
         String serviceName = "test";
         String token = "test-1";
         long expectResult = 0L;
-        Mockito.doReturn(expectResult).when(redisTicketReaderRepository).readWaitingNumber(
+        Mockito.doReturn(expectResult).when(redisTicketReaderRepository).readAndDeleteWaitingNumber(
                 token
         );
         Assertions.assertThat( ticketService.poolingWaitingQueue(token) ).isEqualTo(true);
