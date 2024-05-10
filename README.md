@@ -44,4 +44,11 @@ https://chip-supernova-606.notion.site/67b0252bb3bd4b28aa315e647e524b0a?pvs=4
 
 이슈 : DistributedLock 어노테이션에 디버그 포인트가 잡히지 않고 락이 잡히지 않음 ㅠㅠ..
 
+# 인덱스 분석 문서
+
+블로그에 작성: https://ingyeoking13.tistory.com/350
+
+# 대기열 관련 문서
+
+블로그에 작성: https://ingyeoking13.tistory.com/351
 

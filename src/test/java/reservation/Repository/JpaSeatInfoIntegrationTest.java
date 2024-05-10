@@ -1,5 +1,7 @@
 package reservation.Repository;
 
+import java.util.List;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
+import reservation.Domain.Seat;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -32,10 +35,10 @@ public class JpaSeatInfoIntegrationTest {
   }
 
   @Test
-  @Timeout(1)
   void test_좌석정보가져오기() {
-    jpaSeatInfoCoreRepository.getAllSeats(1L);
-  }
 
+    List<Seat> seats = jpaSeatInfoCoreRepository.getAllSeats(1L);
+    Assertions.assertThat(seats.size()).isGreaterThan(0);
+  }
 
 }

@@ -41,9 +41,7 @@ public class RedisTicketReaderRepository implements TicketReaderRepository{
     @DistributedLock(key = "#token")
     public long readAndDeleteWaitingNumber(String token) {
         String value = this.valueOperation.getAndDelete(token);
-        log.info(value + "***");
         if (value == null) {
-            log.info("hi");
             return -1L;
         }
         Long rank = this.zSetOperations.rank(rankKey,token);

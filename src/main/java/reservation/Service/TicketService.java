@@ -31,7 +31,6 @@ public class TicketService {
 
     public boolean poolingWaitingQueue(String token) throws TokenUnavailableException, WaitingException {
         long result = ticketReaderRepository.readAndDeleteWaitingNumber(token);
-        log.info("VALLL");
         if (result < 0) {
             log.info(result + "00");
             throw new TokenUnavailableException();
