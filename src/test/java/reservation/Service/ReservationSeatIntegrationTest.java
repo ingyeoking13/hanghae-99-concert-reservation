@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -51,7 +52,7 @@ public class ReservationSeatIntegrationTest {
     for (int i = 1; i <= numThreads; i++) {
       CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
         try {
-          reservationService.reserveSeat(1L, 1L);
+          reservationService.reserveSeat(51L, 1L);
           successCount.incrementAndGet();
         } catch (Exception e) {
           System.out.println(e);
