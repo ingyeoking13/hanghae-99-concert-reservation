@@ -10,6 +10,7 @@ import reservation.Domain.Account;
 import reservation.Domain.Reservation;
 import reservation.Domain.User;
 import reservation.Repository.*;
+import reservation.aop.DistributedLock;
 
 @Service
 @Transactional
@@ -20,6 +21,8 @@ public class PaymentService {
     @Autowired JpaAccountCoreRepository jpaAccountCoreRepository;
     @Autowired JpaUserCoreRepository jpaUserCoreRepository;
     @Autowired JpaAccountHistoryCoreRepository jpaAccountHistoryCoreRepository;
+
+    @DistributedLock(key="#userId")
     public boolean payForPreReservedSeat(int amount, Long userId) throws Exception {
         Reservation reservation = jpaReservationCoreRepository.savePaymentReservationInfo( userId );
         try{
