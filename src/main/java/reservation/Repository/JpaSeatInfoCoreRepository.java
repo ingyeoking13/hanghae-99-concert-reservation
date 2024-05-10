@@ -12,7 +12,7 @@ public class JpaSeatInfoCoreRepository {
     @Autowired private SeatInfoRepository seatInfoRepository;
 
     public List<Seat> getAllSeats(long showId) {
-        List<Seat> seat = seatInfoRepository.findByConcertShow_Id(showId);
+        List<Seat> seat = seatInfoRepository.findByConcertShowIdWithStatus(showId, "Empty");
         return seat;
     }
 

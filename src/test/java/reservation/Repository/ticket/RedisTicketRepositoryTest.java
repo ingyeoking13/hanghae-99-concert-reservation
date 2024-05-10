@@ -1,5 +1,11 @@
 package reservation.Repository.ticket;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +61,33 @@ class RedisTicketRepositoryTest {
         Assertions.assertThat(res1).isEqualTo(0);
         res1 = ticketReaderRepository.readAndDeleteWaitingNumber("test-1");
         Assertions.assertThat(res1).isEqualTo(-1L);
+    }
+
+    @Test
+    void test_대기표_읽은후_삭제확인_동시성테스트() {
+
+        ticketWriterRepository.writeNewTicket("test", 1);
+        int numThreads = 60;
+
+        ExecutorService executorService = Executors.newFixedThreadPool(60);
+        List<CompletableFuture> futures = new ArrayList<>();
+
+        AtomicInteger successCount = new AtomicInteger(0);
+        AtomicInteger failCount = new AtomicInteger(0);
+
+        for (int i=1; i<= numThreads; i++) {
+            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+                Long res = ticketReaderRepository.readAndDeleteWaitingNumber("test-1");
+                if (res == 0) successCount.incrementAndGet();
+                else failCount.incrementAndGet();
+            }, executorService);
+            futures.add(future);
+        }
+
+        CompletableFuture.allOf((futures.toArray(new CompletableFuture[0]))).join();
+        executorService.shutdown();
+
+        Assertions.assertThat(successCount.get()).isEqualTo(1);
+        Assertions.assertThat(failCount.get()).isEqualTo(59);
     }
 }
