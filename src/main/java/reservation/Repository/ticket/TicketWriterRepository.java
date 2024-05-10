@@ -9,4 +9,5 @@ import java.time.LocalDateTime;
 @Repository
 public interface TicketWriterRepository {
     public String writeNewTicket(String serviceName, int userId);
+    public void cleanTicketWriter();
 }

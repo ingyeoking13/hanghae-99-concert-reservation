@@ -32,6 +32,10 @@ public class RedisTicketWriterRepository implements TicketWriterRepository {
         return token;
     }
 
+    public void cleanTicketWriter(){
+        zSetOperations.removeRange(rankKey, 0, -1);
+    }
+
     private void setTimeOutKey(String token) {
         valueOperation.set(token, "1", Duration.ofMinutes(5));
     }

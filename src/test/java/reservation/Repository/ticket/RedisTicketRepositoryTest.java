@@ -7,6 +7,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +19,6 @@ import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
-import reservation.DTO.Exception.TokenUnavailableException;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -34,6 +35,11 @@ class RedisTicketRepositoryTest {
     static void registerPgProperties(DynamicPropertyRegistry registry) {
         registry.add("spring.redis.host", () -> redisContainer.getHost());
         registry.add("spring.redis.port", () -> String.valueOf(redisContainer.getMappedPort(6379)));
+    }
+
+    @AfterEach
+    void cleanTicketWriter(){
+        ticketWriterRepository.cleanTicketWriter();
     }
 
     @Test
@@ -78,6 +84,7 @@ class RedisTicketRepositoryTest {
         for (int i=1; i<= numThreads; i++) {
             CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                 Long res = ticketReaderRepository.readAndDeleteWaitingNumber("test-1");
+                System.out.println(res);
                 if (res == 0) successCount.incrementAndGet();
                 else failCount.incrementAndGet();
             }, executorService);
