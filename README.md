@@ -52,3 +52,7 @@ https://chip-supernova-606.notion.site/67b0252bb3bd4b28aa315e647e524b0a?pvs=4
 
 블로그에 작성: https://ingyeoking13.tistory.com/351
 
+# 트랜잭션 분리와 앱 이벤트, 메시지 브로커 
+
+설계안 블로그에 작성: https://ingyeoking13.tistory.com/352
+
