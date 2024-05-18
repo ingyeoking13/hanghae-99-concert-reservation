@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import reservation.Domain.*;
 import reservation.Repository.*;
 
@@ -18,6 +19,7 @@ class PaymentServiceTest {
     @Mock JpaAccountCoreRepository jpaAccountCoreRepository;
     @Mock JpaUserCoreRepository jpaUserCoreRepository;
     @Mock JpaAccountHistoryCoreRepository jpaAccountHistoryCoreRepository;
+    @Mock ApplicationEventPublisher applicationEventPublisher;
 
     public PaymentServiceTest() {
         jpaReservationCoreRepository = Mockito.mock(JpaReservationCoreRepository.class);
@@ -25,20 +27,25 @@ class PaymentServiceTest {
         jpaAccountCoreRepository = Mockito.mock(JpaAccountCoreRepository.class);
         jpaUserCoreRepository = Mockito.mock(JpaUserCoreRepository.class);
         jpaAccountHistoryCoreRepository = Mockito.mock(JpaAccountHistoryCoreRepository.class);
+        applicationEventPublisher = Mockito.mock(ApplicationEventPublisher.class);
 
         paymentService = new PaymentService(
                 jpaReservationCoreRepository,
                 jpaPaymentCoreRepository,
                 jpaAccountCoreRepository,
                 jpaUserCoreRepository,
-                jpaAccountHistoryCoreRepository
+                jpaAccountHistoryCoreRepository,
+                applicationEventPublisher
         );
     }
 
     @Test
     public void test_예약된_좌석_결제하기() throws Exception{
         // given
-        Mockito.doReturn(mock(Reservation.class))
+        Seat seat = new Seat();
+        seat.setId(1);
+        Reservation reservation = Reservation.builder().seat(seat).build();
+        Mockito.doReturn(reservation)
                 .when(jpaReservationCoreRepository).savePaymentReservationInfo(1L);
         Mockito.doReturn(mock(Account.class))
                 .when(jpaAccountCoreRepository).findByUserId(1L);
@@ -59,7 +66,7 @@ class PaymentServiceTest {
                 anyInt()
         );
 
-        boolean result = paymentService.payForPreReservedSeat(1, 1L);
-        Assertions.assertThat(result).isEqualTo(true);
+        Long seatId  = paymentService.payForPreReservedSeat(1, 1L);
+        Assertions.assertThat(seatId).isEqualTo(1L);
     }
 }

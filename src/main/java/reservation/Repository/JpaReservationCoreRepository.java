@@ -26,13 +26,22 @@ public class JpaReservationCoreRepository {
         return true;
     }
 
-    public Reservation savePaymentReservationInfo(Long reservationId) {
-        Reservation reservation = reservationRepository.findById(reservationId).get();
+    public Reservation savePaymentReservationInfo(Long userId) {
+        Reservation reservation = reservationRepository.findByUser_Id(userId).get();
+        reservation.getSeat().setOccupiedStatus("Confirmed");
         reservationRepository.save( reservation );
         return reservation;
     }
 
-    public Reservation findById(Long id) {
-        return reservationRepository.findById(id).get();
+    public Reservation rollbackSavePaymentReservationInfo(Long userId) {
+        Reservation reservation = reservationRepository.findByUser_Id(userId).get();
+        reservation.getSeat().setOccupiedStatus("Reserved");
+        reservationRepository.save( reservation );
+        return reservation;
     }
+
+    public Reservation getUserReservationInfo(Long reservationId) {
+        return reservationRepository.findById(reservationId).get();
+    }
+
 }

@@ -42,8 +42,6 @@ https://chip-supernova-606.notion.site/67b0252bb3bd4b28aa315e647e524b0a?pvs=4
 - 금액 충전 및 사용 : 분산 락을 이용하여 비관적인 락과 같은 동작을 기대하여 구현. 비관락을 사용하지 않는 이유는 DB 부하를 줄이기 위함.
 참고문서 : https://helloworld.kurly.com/blog/distributed-redisson-lock/
 
-이슈 : DistributedLock 어노테이션에 디버그 포인트가 잡히지 않고 락이 잡히지 않음 ㅠㅠ..
-
 # 인덱스 분석 문서
 
 블로그에 작성: https://ingyeoking13.tistory.com/350
