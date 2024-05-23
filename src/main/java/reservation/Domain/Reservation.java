@@ -18,11 +18,11 @@ public class Reservation {
     @JoinColumn(name="seat_id")
     Seat seat;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="user_id")
     User user;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="show_id")
     Show show;
 

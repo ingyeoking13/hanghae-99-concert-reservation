@@ -51,10 +51,11 @@ public class PaymentServiceIntegrationTest {
   @Test
   void test_이벤트발행_롤백테스트() {
     // given - when
-    Assertions.assertDoesNotThrow(() -> reservationService.reserveSeat(51L, 1L));
-    Long seatId = paymentService.payForPreReservedSeat(1, 1L);
+    Assertions.assertDoesNotThrow(() -> reservationService.reserveSeat(52L, 2L));
+    Long seatId = paymentService.payForPreReservedSeat(1, 2L);
+    System.out.println(seatId);
     // try twice
-    paymentService.payForPreReservedSeat(1, 1L);
+    paymentService.payForPreReservedSeat(1, 2L);
 
     // then
     Seat seat = jpaSeatInfoCoreRepository.findById(seatId);

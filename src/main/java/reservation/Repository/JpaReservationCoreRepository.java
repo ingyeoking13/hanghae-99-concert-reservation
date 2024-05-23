@@ -1,13 +1,17 @@
 package reservation.Repository;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import reservation.Domain.Reservation;
 import reservation.Domain.Seat;
 import reservation.Domain.Show;
 import reservation.Domain.User;
 
 @Repository
+@Slf4j
 public class JpaReservationCoreRepository {
     @Autowired private ReservationRepository reservationRepository;
 
@@ -29,14 +33,13 @@ public class JpaReservationCoreRepository {
     public Reservation savePaymentReservationInfo(Long userId) {
         Reservation reservation = reservationRepository.findByUser_Id(userId).get();
         reservation.getSeat().setOccupiedStatus("Confirmed");
-        reservationRepository.save( reservation );
         return reservation;
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Reservation rollbackSavePaymentReservationInfo(Long userId) {
         Reservation reservation = reservationRepository.findByUser_Id(userId).get();
         reservation.getSeat().setOccupiedStatus("Reserved");
-        reservationRepository.save( reservation );
         return reservation;
     }
 

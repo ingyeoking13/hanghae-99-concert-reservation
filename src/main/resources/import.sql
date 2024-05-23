@@ -9955,4 +9955,6 @@ insert into seat_info (id, seat_number, occupied_status, version, show_id)values
 
 
 insert into user (id) values(1);
+insert into user (id) values(2);
 insert into account (id, user_id, amount)  values(1, 1, 0);
+insert into account (id, user_id, amount)  values(2, 2, 0);

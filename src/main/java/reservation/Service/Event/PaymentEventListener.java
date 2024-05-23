@@ -22,8 +22,9 @@ public class PaymentEventListener {
     try {
       paymentService.decreaseUserAccount(amount, userId);
     } catch (Exception e) {
-      log.info("Exception occur, rollback done.");
+      log.info("Exception occur, rollback done.!!");
       paymentService.rollbackPayForPreReservedSeat(userId);
+      log.info("Exception occur, rollback done.");
     }
   }
 }
